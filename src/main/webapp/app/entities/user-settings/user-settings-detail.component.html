@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="userSettings">
+            <h2><span>User Settings</span> {{ userSettings.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Wallpaper</span></dt>
+                <dd>
+                    <span>{{ userSettings.wallpaper }}</span>
+                </dd>
+                <dt><span>Ring Tone</span></dt>
+                <dd>
+                    <span>{{ userSettings.ringTone }}</span>
+                </dd>
+                <dt><span>Volume</span></dt>
+                <dd>
+                    <span>{{ userSettings.volume }}</span>
+                </dd>
+                <dt><span>Created</span></dt>
+                <dd>
+                    <span>{{ userSettings.created }}</span>
+                </dd>
+                <dt><span>End User</span></dt>
+                <dd>
+                    <div *ngIf="userSettings.endUser">
+                        <a [routerLink]="['/end-user', userSettings.endUser?.id, 'view']">{{ userSettings.endUser?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/user-settings', userSettings.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+{
+  "name": "EndUser",
+  "fields": [
+    {
+      "fieldName": "firstName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "contact",
+      "otherEntityRelationshipName": "endUser",
+      "relationshipName": "contacts"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "userSettings",
+      "otherEntityRelationshipName": "endUser",
+      "relationshipName": "settings"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organization",
+      "otherEntityRelationshipName": "endUser",
+      "relationshipName": "organization",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200902194402",
+  "entityTableName": "end_user",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

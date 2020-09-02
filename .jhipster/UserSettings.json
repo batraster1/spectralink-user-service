@@ -1,0 +1,41 @@
+{
+  "name": "UserSettings",
+  "fields": [
+    {
+      "fieldName": "wallpaper",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ringTone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "volume",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "endUser",
+      "otherEntityRelationshipName": "settings",
+      "relationshipName": "endUser",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200902194602",
+  "entityTableName": "user_settings",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,61 @@
+entity Customer {
+	customerName String required,
+    customerIcon String,
+    created Instant
+}
+
+entity Organization {
+	organizationName String required,
+    organizationDescription String,
+    organizationIcon String,   
+    created Instant
+}
+
+entity EndUser {
+
+	firstName String required,
+	lastName String,
+	email String,
+	phoneNumber String,
+	created Instant
+}
+
+entity Contact {
+	firstName String required,
+	lastName String,
+	email String,
+	phoneNumber String,
+    sipExtension String,
+	created Instant,
+    contactIcon String
+}
+
+entity UserSettings {
+	wallpaper String,
+    ringTone String,
+    volume String,
+    created Instant
+}
+
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Customer{organization} to Organization{customer},
+    Organization{endUser} to EndUser{organization},
+	EndUser{contacts} to Contact{endUser},
+    EndUser{settings} to UserSettings{endUser},
+}
+
+
+// Set pagination options
+paginate Customer, Organization with infinite-scroll
+paginate EndUser, Contact , UserSettings with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

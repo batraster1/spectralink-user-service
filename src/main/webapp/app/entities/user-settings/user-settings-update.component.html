@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-user-settings-heading">Create or edit a User Settings</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_wallpaper">Wallpaper</label>
+                    <input type="text" class="form-control" name="wallpaper" id="field_wallpaper"
+                           formControlName="wallpaper"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_ringTone">Ring Tone</label>
+                    <input type="text" class="form-control" name="ringTone" id="field_ringTone"
+                           formControlName="ringTone"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_volume">Volume</label>
+                    <input type="text" class="form-control" name="volume" id="field_volume"
+                           formControlName="volume"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_created">Created</label>
+                    <div class="d-flex">
+                        <input id="field_created" type="datetime-local" class="form-control" name="created" formControlName="created" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_endUser">End User</label>
+                    <select class="form-control" id="field_endUser" name="endUser" formControlName="endUser">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="endUserOption.id === editForm.get('endUser')!.value?.id ? editForm.get('endUser')!.value : endUserOption" *ngFor="let endUserOption of endusers; trackBy: trackById">{{ endUserOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

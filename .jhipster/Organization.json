@@ -1,0 +1,50 @@
+{
+  "name": "Organization",
+  "fields": [
+    {
+      "fieldName": "organizationName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "organizationDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "organizationIcon",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "endUser",
+      "otherEntityRelationshipName": "organization",
+      "relationshipName": "endUser"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "customer",
+      "otherEntityRelationshipName": "organization",
+      "relationshipName": "customer",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200902194302",
+  "entityTableName": "organization",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

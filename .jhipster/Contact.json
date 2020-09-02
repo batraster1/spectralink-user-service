@@ -1,0 +1,56 @@
+{
+  "name": "Contact",
+  "fields": [
+    {
+      "fieldName": "firstName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sipExtension",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "contactIcon",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "endUser",
+      "otherEntityRelationshipName": "contacts",
+      "relationshipName": "endUser",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200902194502",
+  "entityTableName": "contact",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -90,4 +90,9 @@ public final class SecurityUtils {
     private static List<GrantedAuthority> mapRolesToGrantedAuthorities(Collection<String> roles) {
         return roles.stream().filter(role -> role.startsWith("ROLE_")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
+    
+    @SuppressWarnings("unchecked")
+    public static Collection<? extends GrantedAuthority> extractAuthorityFromAttributes(Map<String, Object> attributes) {
+        return mapRolesToGrantedAuthorities((Collection<String>) attributes.getOrDefault("cognito:groups", new ArrayList<>()));
+    }
 }

@@ -1,11 +1,8 @@
 package com.spectralink.user.config;
 
-import com.spectralink.user.security.*;
-import com.spectralink.user.security.SecurityUtils;
-import com.spectralink.user.security.oauth2.AudienceValidator;
-import com.spectralink.user.security.oauth2.JwtGrantedAuthorityConverter;
-import io.github.jhipster.config.JHipsterProperties;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -22,13 +19,24 @@ import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMap
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
 import org.springframework.security.oauth2.core.OAuth2TokenValidator;
 import org.springframework.security.oauth2.core.oidc.user.OidcUserAuthority;
-import org.springframework.security.oauth2.jwt.*;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtDecoders;
+import org.springframework.security.oauth2.jwt.JwtValidators;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter;
 import org.springframework.web.filter.CorsFilter;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
+
+import com.spectralink.user.security.AuthoritiesConstants;
+import com.spectralink.user.security.SecurityUtils;
+import com.spectralink.user.security.oauth2.AudienceValidator;
+import com.spectralink.user.security.oauth2.JwtGrantedAuthorityConverter;
+
+import io.github.jhipster.config.JHipsterProperties;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
@@ -124,7 +132,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     // each scope as a GrantedAuthority, which we don't care about.
                     if (authority instanceof OidcUserAuthority) {
                         OidcUserAuthority oidcUserAuthority = (OidcUserAuthority) authority;
-                        mappedAuthorities.addAll(SecurityUtils.extractAuthorityFromClaims(oidcUserAuthority.getUserInfo().getClaims()));
+                        mappedAuthorities.addAll(SecurityUtils.extractAuthorityFromAttributes(oidcUserAuthority.getAttributes()));
                     }
                 }
             );
@@ -144,4 +152,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         return jwtDecoder;
     }
+
 }
